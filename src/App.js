@@ -1,23 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Card from "./component/Cards/Row";
+import Filter from "./component/Filters/Filter";
+import Pagination from "./component/Pagination/Pagination";
+import Search from "./component/Search/Search";
+import { Container, Grid } from "@mui/material";
+import { useState, useEffect } from "react";
 
 function App() {
+  let [pageNumber, setPageNumber] = useState(1);
+  let [fetchData, setFetchData] = useState([]);
+  let [search, setSearch] = useState("");
+  let api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${search}`;
+  let { info, results } = fetchData;
+  useEffect(() => {
+    (async function () {
+      let data = await fetch(api).then((res) => res.json());
+      setFetchData(data);
+    })();
+  }, [api]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 className="text-center"> Rick & Morty</h1>
+      <Container>
+        <Search setPageNumber={setPageNumber} setSearch={setSearch}></Search>
+      </Container>
+      <Grid container>
+        <Grid item xs={3} sm={3}>
+          <Filter></Filter>
+        </Grid>
+        <Grid item sm={9}>
+          <Grid container justifyContent={"center"}>
+            <Card results={results} />
+          </Grid>
+        </Grid>
+      </Grid>
+      <Pagination
+        info={info}
+        pageNumber={pageNumber}
+        setPageNumber={setPageNumber}
+      ></Pagination>
     </div>
   );
 }
