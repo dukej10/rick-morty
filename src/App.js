@@ -8,9 +8,10 @@ import { useState, useEffect } from "react";
 
 function App() {
   let [pageNumber, setPageNumber] = useState(1);
-  let [fetchData, setFetchData] = useState([]);
+  let [fetchData, setFetchData] = useState("");
   let [search, setSearch] = useState("");
-  let api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${search}`;
+  let [status, setStatus] = useState([]);
+  let api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${search}&status=${status}`;
   let { info, results } = fetchData;
   useEffect(() => {
     (async function () {
@@ -25,9 +26,7 @@ function App() {
         <Search setPageNumber={setPageNumber} setSearch={setSearch}></Search>
       </Container>
       <Grid container>
-        <Grid item xs={3} sm={3}>
-          <Filter></Filter>
-        </Grid>
+        <Filter setStatus={setStatus} setPageNumber={setPageNumber}></Filter>
         <Grid item sm={9}>
           <Grid container justifyContent={"center"}>
             <Card results={results} />
