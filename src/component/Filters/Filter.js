@@ -1,7 +1,34 @@
 import React from "react";
-
-function Filter() {
-  return <div>filter</div>;
+import { Grid, Typography, Box } from "@mui/material";
+import Gender from "./Category/Gender";
+import Species from "./Category/Species";
+import Status from "./Category/Status";
+function Filter({ setStatus, setPageNumber }) {
+  return (
+    <Grid item xs={3} sm={3}>
+      <Typography fontWeight={"bold"} sx={{ mb: 4 }} textAlign={"center"}>
+        Filter
+      </Typography>
+      <Typography
+        sx={{ mb: 2, textDecoration: "underline" }}
+        textAlign="center"
+        style={{ cursor: "pointer" }}
+      >
+        Clear Filter
+      </Typography>
+      <Box
+        justifyContent={"end"}
+        display={"flex"}
+        flexDirection={"column"}
+        alignContent={"end"}
+        sx={{ marginLeft: 7 }}
+      >
+        <Status setPageNumber={setPageNumber} setStatus={setStatus} />
+        <Gender />
+        <Species />
+      </Box>
+    </Grid>
+  );
 }
 
 export default Filter;
