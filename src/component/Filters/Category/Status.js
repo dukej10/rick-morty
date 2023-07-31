@@ -9,9 +9,10 @@ import {
 } from "@mui/material";
 import FilterBTN from "../FilterBTN";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useState } from "react";
 const Status = ({ setPageNumber, setStatus }) => {
   let status = ["Alive", "Dead", "Unknown"];
-  const [value, setValue] = React.useState("female");
+  const [value, setValue] = useState("");
 
   const handleColorChange = (event) => {
     // Obtener el valor del botón de radio que se seleccionó
@@ -39,7 +40,7 @@ const Status = ({ setPageNumber, setStatus }) => {
           >
             {status.map((item, index) => (
               <FilterBTN
-                setStatus={setStatus}
+                task={setStatus}
                 setPageNumber={setPageNumber}
                 key={index}
                 index={index}

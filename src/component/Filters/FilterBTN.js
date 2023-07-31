@@ -6,7 +6,7 @@ const FilterBTN = ({
   name,
   index,
   setValue,
-  setStatus,
+  task,
   setPageNumber,
   value,
 }) => {
@@ -23,6 +23,7 @@ const FilterBTN = ({
       value="red"
       control={
         <Button
+          style={{ textTransform: "capitalize" }}
           sx={{ mx: 0 }}
           variant={value === item ? "contained" : "outlined"}
           color="primary"
@@ -30,7 +31,7 @@ const FilterBTN = ({
             handleColorChange(e);
             setValue(item);
             setPageNumber(1);
-            setStatus(item);
+            task(item);
           }}
           name={name}
           id={`${name}-${index}`}

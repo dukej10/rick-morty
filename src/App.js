@@ -10,8 +10,10 @@ function App() {
   let [pageNumber, setPageNumber] = useState(1);
   let [fetchData, setFetchData] = useState("");
   let [search, setSearch] = useState("");
-  let [status, setStatus] = useState([]);
-  let api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${search}&status=${status}`;
+  let [status, setStatus] = useState("");
+  let [gender, setGender] = useState("");
+  let [species, setSpecies] = useState("");
+  let api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${search}&status=${status}&gender=${gender}&species=${species}`;
   let { info, results } = fetchData;
   useEffect(() => {
     (async function () {
@@ -26,7 +28,12 @@ function App() {
         <Search setPageNumber={setPageNumber} setSearch={setSearch}></Search>
       </Container>
       <Grid container>
-        <Filter setStatus={setStatus} setPageNumber={setPageNumber}></Filter>
+        <Filter
+          setStatus={setStatus}
+          setPageNumber={setPageNumber}
+          setGender={setGender}
+          setSpecies={setSpecies}
+        ></Filter>
         <Grid item sm={9}>
           <Grid container justifyContent={"center"}>
             <Card results={results} />
